@@ -1,0 +1,18 @@
+.home {
+  text-align: center;
+  width: 60%;
+  margin-top: 20%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: black;
+}
+
+.bank-name {
+  color: orangered;
+  font-size: 100px;
+}
+
+.manager-portal {
+  color: grey;
+  font-size: 70px;
+}
