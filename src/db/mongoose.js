@@ -1,8 +1,11 @@
 const mongoose = require("mongoose");
-const { uri } = require("../../config/keys");
+const { user, password } = require("../../config/keys");
 
-mongoose.connect(`mongodb+srv://${uri}`, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  `mongodb+srv://${user}:${password}@cluster0.1ki7z.mongodb.net/myBankDatabase?retryWrites=true&w=majority`,
+  {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+  }
+);
