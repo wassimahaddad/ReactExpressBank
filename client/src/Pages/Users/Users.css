@@ -65,3 +65,23 @@ span {
   color: white;
   cursor: pointer;
 }
+
+.hide {
+  display: none;
+}
+
+.form {
+  margin-top: 50px;
+  width: 400px;
+  margin-left: 29%;
+}
+
+.form > label {
+  font-size: 20px;
+}
+.input-field {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  width: 400px;
+  font-size: 20px;
+}

@@ -5,11 +5,13 @@ import "./Accounts.css";
 const Accounts = () => {
   const [data, setData] = useState("");
   const [inputVal, setInputVal] = useState("");
+  const [cName, setCName] = useState("hide");
 
   const loadAccounts = async () => {
     const response = await api.get("accounts");
     console.log(response);
     setData(response.data);
+    setCName("hide");
   };
 
   const handleSubmit = async () => {
@@ -17,11 +19,20 @@ const Accounts = () => {
     const arr = [];
     arr.push(response.data);
     setData(arr);
+    setCName("hide");
+  };
+
+  const handleCreate = () => {
+    setData("");
+    setCName("form");
   };
 
   return (
     <div className="accounts-main-page">
       <div className="search-section">
+        <div onClick={handleCreate} className="create-account">
+          Create account
+        </div>
         <div>
           <div className="account-input">
             <input
@@ -65,6 +76,14 @@ const Accounts = () => {
               </div>
             ))
           : null}
+      </div>
+      <div className={cName}>
+        <label>User ID</label>
+        <input className="input-field" type="text" name="" id="" />
+        <label>Cash</label>
+        <input className="input-field" type="text" name="" id="" />
+        <label>Credit</label>
+        <input className="input-field" type="text" name="" id="" />
       </div>
     </div>
   );
