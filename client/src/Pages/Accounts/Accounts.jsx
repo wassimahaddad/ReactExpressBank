@@ -5,6 +5,9 @@ import "./Accounts.css";
 const Accounts = () => {
   const [data, setData] = useState("");
   const [inputVal, setInputVal] = useState("");
+  const [userId, setUserId] = useState("");
+  const [cash, setCash] = useState(0);
+  const [credit, setCredit] = useState(0);
   const [cName, setCName] = useState("hide");
 
   const loadAccounts = async () => {
@@ -26,8 +29,13 @@ const Accounts = () => {
     setData("");
     setCName("form");
   };
-  const handleCreateForm = () => {
-    console.log("created");
+  const handleCreateForm = async () => {
+    const response = await api.post("accounts", {
+      user_id: userId,
+      cash,
+      credit,
+    });
+    console.log(response);
   };
   return (
     <div className="accounts-main-page">
@@ -81,11 +89,29 @@ const Accounts = () => {
       </div>
       <div className={cName}>
         <label>User ID</label>
-        <input className="input-field" type="text" name="user_id" />
+        <input
+          className="input-field"
+          type="text"
+          name="user_id"
+          value={userId}
+          onChange={(e) => setUserId(e.target.value)}
+        />
         <label>Cash</label>
-        <input className="input-field" type="text" name="cash" />
+        <input
+          className="input-field"
+          type="text"
+          name="cash"
+          value={cash}
+          onChange={(e) => setCash(e.target.value)}
+        />
         <label>Credit</label>
-        <input className="input-field" type="text" name="credit" />
+        <input
+          className="input-field"
+          type="text"
+          name="credit"
+          value={credit}
+          onChange={(e) => setCredit(e.target.value)}
+        />
         <div onClick={handleCreateForm} className="account-create">
           Create
         </div>
