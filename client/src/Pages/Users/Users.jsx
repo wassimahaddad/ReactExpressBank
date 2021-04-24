@@ -48,7 +48,7 @@ const Users = () => {
             <input
               className="user-search"
               type="text"
-              placeholder="Search by Account ID"
+              placeholder="Search by User ID"
               value={inputVal}
               onChange={(e) => setInputVal(e.target.value)}
             />

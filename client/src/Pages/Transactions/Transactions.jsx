@@ -15,7 +15,7 @@ const Transactions = () => {
   return (
     <div className="transactions-container">
       <div className="transactions-bar">
-        <div className="transactions-title">Choose sction</div>
+        <div className="transactions-title">Choose action</div>
         <div>
           <select
             onChange={handleTransactions}
