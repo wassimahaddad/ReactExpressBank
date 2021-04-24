@@ -81,11 +81,11 @@ const Accounts = () => {
       </div>
       <div className={cName}>
         <label>User ID</label>
-        <input className="input-field" type="text" name="" id="" />
+        <input className="input-field" type="text" name="user_id" />
         <label>Cash</label>
-        <input className="input-field" type="text" name="" id="" />
+        <input className="input-field" type="text" name="cash" />
         <label>Credit</label>
-        <input className="input-field" type="text" name="" id="" />
+        <input className="input-field" type="text" name="credit" />
         <div onClick={handleCreateForm} className="account-create">
           Create
         </div>

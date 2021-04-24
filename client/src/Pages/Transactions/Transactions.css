@@ -1,0 +1,32 @@
+.transactions-container {
+  width: 60%;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 12%;
+}
+.transactions-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 60%;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.transactions-title {
+  font-size: 20px;
+}
+
+.transactions-options {
+  margin-left: 50px;
+  font-size: 20px;
+}
+
+.transactrions-component {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+  width: 400px;
+}

@@ -78,11 +78,11 @@ const Users = () => {
       </div>
       <div className={cName}>
         <label>Name</label>
-        <input className="input-field" type="text" name="" id="" />
+        <input className="input-field" type="text" name="name" />
         <label>Email Address</label>
-        <input className="input-field" type="text" name="" id="" />
+        <input className="input-field" type="email" name="email" />
         <label>Mobile Phone</label>
-        <input className="input-field" type="text" name="" id="" />
+        <input className="input-field" type="phone" name="" />
         <div onClick={handleCreateForm} className="user-create">
           Create
         </div>
