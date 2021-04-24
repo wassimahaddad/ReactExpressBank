@@ -4,11 +4,18 @@ import "./Users.css";
 
 const Users = () => {
   const [data, setData] = useState("");
+  const [inputVal, setInputVal] = useState("");
 
   const loadUsers = async () => {
     const response = await api.get("users");
     console.log(response);
     setData(response.data);
+  };
+  const handleSubmit = async () => {
+    const response = await api.get(`users/${inputVal}`);
+    const arr = [];
+    arr.push(response.data);
+    setData(arr);
   };
 
   return (
@@ -20,10 +27,14 @@ const Users = () => {
               className="user-search"
               type="text"
               placeholder="Search by ID or email"
+              value={inputVal}
+              onChange={(e) => setInputVal(e.target.value)}
             />
           </div>
 
-          <div className="user-submit">Submit</div>
+          <div onClick={handleSubmit} className="user-submit">
+            Submit
+          </div>
         </div>
         <div className="users-load" onClick={loadUsers}>
           Load all users

@@ -20,6 +20,9 @@ function App() {
         <Route path="/accounts" exact>
           <Accounts />
         </Route>
+        <Route path="/accounts:id" exact>
+          <Accounts />
+        </Route>
       </BrowserRouter>
     </div>
   );
