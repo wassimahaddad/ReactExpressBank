@@ -1,16 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
+import api from "../../API/api";
 import "./Cash.css";
 
 const Cash = () => {
-  const handleCash = () => {
-    console.log("Cash");
+  const [account, setAccount] = useState("");
+  const [amount, setAmount] = useState("");
+  const handleCash = async () => {
+    const response = await api.patch("transactions", {
+      operation: "addCash",
+      to_acc: account,
+      sum: amount,
+    });
+    alert(response.statusText);
   };
   return (
     <div>
       <label>Account ID</label>
-      <input className="input-field" type="text" name="user_id" />
+      <input
+        className="input-field"
+        type="text"
+        name="user_id"
+        value={account}
+        onChange={(e) => setAccount(e.target.value)}
+      />
       <label>Cash Amount</label>
-      <input className="input-field" type="text" name="cash" />
+      <input
+        className="input-field"
+        type="text"
+        name="cash"
+        value={amount}
+        onChange={(e) => setAmount(e.target.value)}
+      />
+
       <div onClick={handleCash} className="account-create">
         Add
       </div>

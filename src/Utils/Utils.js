@@ -87,7 +87,73 @@ const withdraw = async (req, res) => {
   }
 };
 
-// ------------------------- Widthdraw ------------------------------------
+// ------------------------- Add Cash ------------------------------------
+
+const addCash = async (req, res) => {
+  const to_acc = await Account.findById(req.body.to_acc);
+  const account = await Account.findById(to_acc);
+  if (account.isActive === false) {
+    return res.status(400).send({
+      error: "Account is locked cannot complete the operation",
+    });
+  } else {
+    try {
+      const account = await Account.findByIdAndUpdate(
+        to_acc._id,
+        { cash: parseInt(to_acc.cash) + parseInt(req.body.sum) },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+
+      if (!account) {
+        return res.status(404).send();
+      }
+
+      res.send(`Transaction completed  
+          ${account} 
+         }`);
+    } catch (e) {
+      res.status(400).send(e);
+    }
+  }
+};
+
+// ------------------------- Add Credit ------------------------------------
+
+const addCredit = async (req, res) => {
+  const to_acc = await Account.findById(req.body.to_acc);
+  const account = await Account.findById(to_acc);
+  if (account.isActive === false) {
+    return res.status(400).send({
+      error: "Account is locked cannot complete the operation",
+    });
+  } else {
+    try {
+      const account = await Account.findByIdAndUpdate(
+        to_acc._id,
+        { credit: parseInt(to_acc.credit) + parseInt(req.body.sum) },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+
+      if (!account) {
+        return res.status(404).send();
+      }
+
+      res.send(`Transaction completed  
+          ${account} 
+         }`);
+    } catch (e) {
+      res.status(400).send(e);
+    }
+  }
+};
+
+// ------------------------- Active/Locked ------------------------------------
 
 const setStatus = async (req, res) => {
   const from_acc = await Account.findById(req.body.from_acc);
@@ -116,4 +182,4 @@ const setStatus = async (req, res) => {
   }
 };
 
-module.exports = { transfer, withdraw, setStatus };
+module.exports = { transfer, withdraw, setStatus, addCash, addCredit };
