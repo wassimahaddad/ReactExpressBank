@@ -6,12 +6,16 @@ const Cash = () => {
   const [account, setAccount] = useState("");
   const [amount, setAmount] = useState("");
   const handleCash = async () => {
-    const response = await api.patch("transactions", {
-      operation: "addCash",
-      to_acc: account,
-      sum: amount,
-    });
-    alert(response.statusText);
+    try {
+      const response = await api.patch("transactions", {
+        operation: "addCash",
+        to_acc: account,
+        sum: amount,
+      });
+      alert(response.statusText);
+    } catch (e) {
+      alert("Operation failed, account may be locked");
+    }
   };
   return (
     <div>

@@ -6,12 +6,18 @@ const Withdraw = () => {
   const [accountId, setAccountId] = useState("");
   const [amount, setAmount] = useState("");
   const handleWithdraw = async () => {
-    const response = await api.patch("transactions", {
-      operation: "withdraw",
-      from_acc: accountId,
-      sum: amount,
-    });
-    alert(response.statusText);
+    try {
+      const response = await api.patch("transactions", {
+        operation: "withdraw",
+        from_acc: accountId,
+        sum: amount,
+      });
+      alert(response.statusText);
+    } catch (e) {
+      alert(
+        "Operation failed, the account may be locked or may not have enough funds to complete the operation"
+      );
+    }
   };
   return (
     <div>

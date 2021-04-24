@@ -5,12 +5,16 @@ import "./Status.css";
 const Status = () => {
   const [AccId, setAccId] = useState("");
   const handleStatus = async (e) => {
-    const response = await api.patch("transactions", {
-      operation: "status",
-      from_acc: AccId,
-      isActive: e.target.id === "Activate" ? true : false,
-    });
-    alert(response.statusText);
+    try {
+      const response = await api.patch("transactions", {
+        operation: "status",
+        from_acc: AccId,
+        isActive: e.target.id === "Activate" ? true : false,
+      });
+      alert(response.statusText);
+    } catch (e) {
+      alert("Operation failed");
+    }
   };
   return (
     <div>

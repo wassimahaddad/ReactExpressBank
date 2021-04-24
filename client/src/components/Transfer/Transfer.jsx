@@ -7,13 +7,19 @@ const Transfer = () => {
   const [toAcc, setToAcc] = useState("");
   const [amount, setAmount] = useState("");
   const handleTransfer = async () => {
-    const response = await api.patch("transactions", {
-      operation: "transfer",
-      from_acc: fromAcc,
-      to_acc: toAcc,
-      sum: amount,
-    });
-    alert(response.statusText);
+    try {
+      const response = await api.patch("transactions", {
+        operation: "transfer",
+        from_acc: fromAcc,
+        to_acc: toAcc,
+        sum: amount,
+      });
+      alert(response.statusText);
+    } catch (e) {
+      alert(
+        "Operation failed, one or both of the accounts may be locked or the source account may not have enough funds to complete the operation"
+      );
+    }
   };
   return (
     <div>

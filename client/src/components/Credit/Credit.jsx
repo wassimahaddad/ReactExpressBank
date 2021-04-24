@@ -6,12 +6,16 @@ const Credit = () => {
   const [account, setAccount] = useState("");
   const [amount, setAmount] = useState("");
   const handleCredit = async () => {
-    const response = await api.patch("transactions", {
-      operation: "addCredit",
-      to_acc: account,
-      sum: amount,
-    });
-    alert(response.statusText);
+    try {
+      const response = await api.patch("transactions", {
+        operation: "addCredit",
+        to_acc: account,
+        sum: amount,
+      });
+      alert(response.statusText);
+    } catch (e) {
+      alert("Operation failed, account may be locked");
+    }
   };
   return (
     <div>
