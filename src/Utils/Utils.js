@@ -11,7 +11,7 @@ const transfer = async (req, res) => {
     account1.isActive == false ||
     account2.isActive === false ||
     (req.body.operation === "transfer" &&
-      from_acc.cash + from_acc.credit <= req.body.sum)
+      parseInt(from_acc.cash) + parseInt(from_acc.credit) <= req.body.sum)
   ) {
     return res.status(400).send({
       error:
@@ -21,7 +21,7 @@ const transfer = async (req, res) => {
     try {
       const account1 = await Account.findByIdAndUpdate(
         from_acc._id,
-        { cash: from_acc.cash - req.body.sum },
+        { cash: parseInt(from_acc.cash) - parseInt(req.body.sum) },
         {
           new: true,
           runValidators: true,
@@ -30,7 +30,7 @@ const transfer = async (req, res) => {
 
       const account2 = await Account.findByIdAndUpdate(
         to_acc._id,
-        { cash: to_acc.cash + req.body.sum },
+        { cash: parseInt(to_acc.cash) + parseInt(req.body.sum) },
         {
           new: true,
           runValidators: true,
@@ -58,7 +58,7 @@ const withdraw = async (req, res) => {
   if (
     account.isActive === false ||
     (req.body.operation === "withdraw" &&
-      from_acc.cash + from_acc.credit <= req.body.sum)
+      parseInt(from_acc.cash) + parseInt(from_acc.credit) <= req.body.sum)
   ) {
     return res.status(400).send({
       error: "Account is locked or not enough funds to complete the operation",
@@ -67,7 +67,7 @@ const withdraw = async (req, res) => {
     try {
       const account = await Account.findByIdAndUpdate(
         from_acc._id,
-        { cash: from_acc.cash - req.body.sum },
+        { cash: parseInt(from_acc.cash) - parseInt(req.body.sum) },
         {
           new: true,
           runValidators: true,
@@ -87,4 +87,33 @@ const withdraw = async (req, res) => {
   }
 };
 
-module.exports = { transfer, withdraw };
+// ------------------------- Widthdraw ------------------------------------
+
+const setStatus = async (req, res) => {
+  const from_acc = await Account.findById(req.body.from_acc);
+
+  if (req.body.operation === "status") {
+    try {
+      const account = await Account.findByIdAndUpdate(
+        from_acc._id,
+        { isActive: req.body.isActive },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+
+      if (!account) {
+        return res.status(404).send();
+      }
+
+      res.send(`Transaction completed  
+            ${account} 
+           }`);
+    } catch (e) {
+      res.status(400).send(e);
+    }
+  }
+};
+
+module.exports = { transfer, withdraw, setStatus };

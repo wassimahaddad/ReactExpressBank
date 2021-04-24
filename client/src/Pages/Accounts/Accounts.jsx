@@ -35,7 +35,7 @@ const Accounts = () => {
       cash,
       credit,
     });
-    console.log(response);
+    alert(response.statusText);
   };
   return (
     <div className="accounts-main-page">

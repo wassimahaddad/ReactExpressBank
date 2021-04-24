@@ -1,7 +1,7 @@
 const express = require("express");
 const Account = require("../models/account");
 const transactionRouter = new express.Router();
-const { transfer, withdraw } = require("../Utils/Utils");
+const { transfer, withdraw, setStatus } = require("../Utils/Utils");
 
 transactionRouter.use(express.json());
 
@@ -15,6 +15,9 @@ transactionRouter.patch("/api/transactions", async (req, res) => {
       break;
     case "withdraw":
       withdraw(req, res);
+      break;
+    case "status":
+      setStatus(req, res);
       break;
     default:
       res.status(500).send("a server error occured");
