@@ -4,14 +4,19 @@ const Account = require("../models/account");
 const transfer = async (req, res) => {
   const from_acc = await Account.findById(req.body.from_acc);
   const to_acc = await Account.findById(req.body.to_acc);
+  const account1 = await Account.findById(from_acc);
+  const account2 = await Account.findById(to_acc);
 
   if (
-    req.body.operation === "transfer" &&
-    from_acc.cash + from_acc.credit <= req.body.sum
+    account1.isActive == false ||
+    account2.isActive === false ||
+    (req.body.operation === "transfer" &&
+      from_acc.cash + from_acc.credit <= req.body.sum)
   ) {
-    return res
-      .status(400)
-      .send({ error: "Not enough funds to complete the operation" });
+    return res.status(400).send({
+      error:
+        "Not enough funds to complete the operation or one of the accounts is locked",
+    });
   } else {
     try {
       const account1 = await Account.findByIdAndUpdate(
@@ -49,14 +54,15 @@ const transfer = async (req, res) => {
 
 const withdraw = async (req, res) => {
   const from_acc = await Account.findById(req.body.from_acc);
-
+  const account = await Account.findById(from_acc);
   if (
-    req.body.operation === "withdraw" &&
-    from_acc.cash + from_acc.credit <= req.body.sum
+    account.isActive === false ||
+    (req.body.operation === "withdraw" &&
+      from_acc.cash + from_acc.credit <= req.body.sum)
   ) {
-    return res
-      .status(400)
-      .send({ error: "Not enough funds to complete the operation" });
+    return res.status(400).send({
+      error: "Account is locked or not enough funds to complete the operation",
+    });
   } else {
     try {
       const account = await Account.findByIdAndUpdate(
