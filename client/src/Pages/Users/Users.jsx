@@ -25,6 +25,9 @@ const Users = () => {
     setData("");
     setCName("form");
   };
+  const handleCreateForm = () => {
+    console.log("created");
+  };
 
   return (
     <div className="users-main-page">
@@ -80,6 +83,9 @@ const Users = () => {
         <input className="input-field" type="text" name="" id="" />
         <label>Mobile Phone</label>
         <input className="input-field" type="text" name="" id="" />
+        <div onClick={handleCreateForm} className="user-create">
+          Create
+        </div>
       </div>
     </div>
   );

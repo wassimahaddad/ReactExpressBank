@@ -85,3 +85,13 @@ span {
   width: 400px;
   font-size: 20px;
 }
+
+.user-create {
+  font-size: 20px;
+  color: orangered;
+}
+
+.user-create:hover {
+  color: orange;
+  cursor: pointer;
+}

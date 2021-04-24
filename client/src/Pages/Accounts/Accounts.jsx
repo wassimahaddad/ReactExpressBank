@@ -26,7 +26,9 @@ const Accounts = () => {
     setData("");
     setCName("form");
   };
-
+  const handleCreateForm = () => {
+    console.log("created");
+  };
   return (
     <div className="accounts-main-page">
       <div className="search-section">
@@ -84,6 +86,9 @@ const Accounts = () => {
         <input className="input-field" type="text" name="" id="" />
         <label>Credit</label>
         <input className="input-field" type="text" name="" id="" />
+        <div onClick={handleCreateForm} className="account-create">
+          Create
+        </div>
       </div>
     </div>
   );

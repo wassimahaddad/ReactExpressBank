@@ -93,3 +93,13 @@ span {
   width: 400px;
   font-size: 20px;
 }
+
+.account-create {
+  font-size: 20px;
+  color: orangered;
+}
+
+.account-create:hover {
+  color: orange;
+  cursor: pointer;
+}
